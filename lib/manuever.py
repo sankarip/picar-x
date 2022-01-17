@@ -55,4 +55,19 @@ def kturn():
     px.forward(30)
     time.sleep(1.5)
     px.forward(0)
+#starting the loop
+exitvar=0
+#loop to choose driving
+while exitvar !=1:
+    choice=input("press 1 for forward and back, 2 for parallel park left, 3 for parallel park right, 4 for kturn, 5 to exit")
+    if choice==1:
+        forwardandback()
+    elif choice==2:
+        parallel_park_left()
+    elif choice==3:
+        parallel_park_right()
+    elif choice==4
+        kturn()
+    elif choice==5
+        exitvar==1
 
