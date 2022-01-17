@@ -5,9 +5,9 @@ try:
     from pin import Pin
     from adc import ADC
     from filedb import fileDB
-    from ezblock import *
-    from ezblock import __reset_mcu__
-    __reset_mcu__()
+    #from ezblock import *
+    #from ezblock import __reset_mcu__
+    #__reset_mcu__()
     time.sleep(0.01)
 except ImportError:
     print("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions")
