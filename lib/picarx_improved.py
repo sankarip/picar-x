@@ -1,4 +1,5 @@
 # from ezblock import Servo,PWM,fileDB,Pin,ADC
+import time
 try:
     from servo import Servo
     from pwm import PWM
@@ -13,7 +14,6 @@ except ImportError:
     print("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions")
     from sim_ezblock import *
 
-import time
 import atexit
 import logging
 #couldn't get logdecorator to install on raspi
@@ -57,6 +57,7 @@ class Picarx(object):
         self.cali_dir_value = [int(i.strip()) for i in self.cali_dir_value.strip("[]").split(",")]
         self.cali_speed_value = [0, 0]
         self.dir_current_angle = 0
+        atexit.register(self.stop)
         #初始化PWM引脚
         for pin in self.motor_speed_pins:
             pin.period(self.PERIOD)
