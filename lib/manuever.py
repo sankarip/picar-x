@@ -66,8 +66,8 @@ while exitvar !=1:
         parallel_park_left()
     elif choice==3:
         parallel_park_right()
-    elif choice==4
+    elif choice==4:
         kturn()
-    elif choice==5
+    elif choice==5:
         exitvar==1
 
