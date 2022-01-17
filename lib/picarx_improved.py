@@ -16,7 +16,8 @@ except ImportError:
 import time
 import atexit
 import logging
-from logdecorator import log_on_start, log_on_end, log_on_error
+#couldn't get logdecorator to install on raspi
+#from logdecorator import log_on_start, log_on_end, log_on_error
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO,
                         datefmt="%H:%M:%S")
@@ -62,9 +63,9 @@ class Picarx(object):
             pin.prescaler(self.PRESCALER)
 
 
-    @log_on_start(logging.DEBUG, "Start setting motor speed")
-    @log_on_error(logging.DEBUG, "Error when setting motor speed")
-    @log_on_end(logging.DEBUG, "Motor speed successfully set")
+    #@log_on_start(logging.DEBUG, "Start setting motor speed")
+    #@log_on_error(logging.DEBUG, "Error when setting motor speed")
+    #@log_on_end(logging.DEBUG, "Motor speed successfully set")
     def set_motor_speed(self,motor,speed):
         # global cali_speed_value,cali_dir_value
         motor -= 1
