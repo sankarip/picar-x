@@ -70,4 +70,5 @@ while exitvar !=1:
         kturn()
     elif choice==5:
         exitvar==1
+    time.sleep(4)
 
