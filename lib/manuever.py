@@ -8,7 +8,7 @@ from picarx_improved import Picarx
 import time
 
 
-def forwardandback:
+def forwardandback():
     px = Picarx()
     px.forward(30)
     time.sleep(1.5)
@@ -17,7 +17,7 @@ def forwardandback:
     time.sleep(1.5)
     px.backward(0)
 
-def parallel_park_left:
+def parallel_park_left():
     #I cant parallel park in real life either
     px = Picarx()
     px.set_dir_servo_angle(20)
@@ -30,7 +30,7 @@ def parallel_park_left:
     time.sleep(1.5)
     px.backward(0)
 
-def parallel_park_right:
+def parallel_park_right():
     px = Picarx()
     px.set_dir_servo_angle(-20)
     time.sleep(0.5)
@@ -43,7 +43,7 @@ def parallel_park_right:
     time.sleep(1.5)
     px.backward(0)
 
-def kturn:
+def kturn():
     px = Picarx()
     px.set_dir_servo_angle(-20)
     time.sleep(0.5)
