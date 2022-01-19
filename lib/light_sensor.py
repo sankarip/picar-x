@@ -33,11 +33,12 @@ class light_sensor(object):
         return adc_value_list
 
 class light_interpreter(object):
-    def __init__(self):
+    def __init__(self,sens, pol):
         self.light = light_sensor(500)
         self.turn=0
-        self.sensitivity=50
-        self.polarity=1
+        self.sensitivity=sens
+        #use -1 to find lighter lines and 1 to find lighter lines
+        self.polarity=pol
         #dark is larger numbers
     def interp(self):
         while True:
@@ -45,11 +46,11 @@ class light_interpreter(object):
             val1=data_list[0]
             val2=data_list[1]
             val3=data_list[2]
-            if val1-self.sensitivity>val2:
+            if val1-self.sensitivity*self.polarity>val2:
                 self.turn=1
-            elif val3-self.sensitivity>val2:
+            elif val3-self.sensitivity*self.polarity>val2:
                 self.turn=-1
-            elif val3-self.sensitivity>val2 and val1-self.sensitivity>val2:
+            elif val3-self.sensitivity*self.polarity>val2 and val1-self.sensitivity*self.polarity>val2:
                 print("lines on both sides detected")
             else:
                 self.turn=0
@@ -58,10 +59,10 @@ class light_interpreter(object):
 
 if __name__ == "__main__":
     import time
-    print("here")
-    a=light_interpreter()
-    a.interp()
-    time.sleep(.5)
+    while True:
+        a=light_interpreter(50,1)
+        a.interp()
+        time.sleep(.5)
 
 
 
