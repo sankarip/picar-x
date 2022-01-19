@@ -44,8 +44,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
             cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
     #cv2.imshow("lane lines", img)
 
-    def make_points(frame, line):
-        height, width, _ = frame.shape
+    def make_points(h,w, line):
+        height=h
+        width=w
         slope, intercept = line
         y1 = height  # bottom of the frame
         y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
@@ -78,11 +79,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
         left_fit_average = np.average(left_fit, axis=0)
         if len(left_fit) > 0:
-            lane_lines.append(make_points(frame, left_fit_average))
+            lane_lines.append(make_points(height,width left_fit_average))
 
         right_fit_average = np.average(right_fit, axis=0)
         if len(right_fit) > 0:
-            lane_lines.append(make_points(frame, right_fit_average))
+            lane_lines.append(make_points(height,width right_fit_average))
     print(lane_lines)
     rawCapture.truncate(0)  # Release cache
 
