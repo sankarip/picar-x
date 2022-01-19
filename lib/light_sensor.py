@@ -71,13 +71,13 @@ class light_controller(object):
             px.set_dir_servo_angle(-30)
             time.sleep(0.5)
             px.forward(10)
-            time.sleep(.2)
+            time.sleep(.05)
         elif self.control==-1:
             px = Picarx()
             px.set_dir_servo_angle(30)
             time.sleep(0.5)
             px.forward(10)
-            time.sleep(.2)
+            time.sleep(.05)
         elif self.control==2:
             px = Picarx()
             px.forward(0)
@@ -85,7 +85,7 @@ class light_controller(object):
         else:
             px = Picarx()
             px.forward(10)
-            time.sleep(.3)
+            time.sleep(.05)
 
 
 if __name__ == "__main__":
