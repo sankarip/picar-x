@@ -31,17 +31,19 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.fillPoly(mask, polygon, 255)
     cropped_edges = cv2.bitwise_and(edges, mask)
     #cv2.imshow("cropped edges", cropped_edges)
-    rawCapture.truncate(0)  # Release cache
     rho = 1  # distance precision in pixel, i.e. 1 pixel
     angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
-    min_threshold = 10  # minimal of votes
+    min_threshold = 100  # minimal of votes
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
-                                    np.array([]), minLineLength=8, maxLineGap=4)
+                                    np.array([]), minLineLength=50, maxLineGap=3)
     if line_segments is not None:
+        print(len(line_segments))
         for line in line_segments:
             x1, y1, x2, y2 = line[0]
-            cv2.line(cropped_edges, (x1, y1), (x2, y2), (255, 0, 0), 3)
-    cv2.imshow("lane lines", cropped_edges)
+            cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
+    cv2.imshow("lane lines", img)
+
+    rawCapture.truncate(0)  # Release cache
 
 
     k = cv2.waitKey(1) & 0xFF
