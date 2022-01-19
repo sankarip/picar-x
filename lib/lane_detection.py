@@ -36,11 +36,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     min_threshold = 100  # minimal of votes
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
                                     np.array([]), minLineLength=50, maxLineGap=3)
+    print(len(line_segments))
     if line_segments is not None:
         print(len(line_segments))
         for line in line_segments:
             x1, y1, x2, y2 = line[0]
-            cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
+            cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
     cv2.imshow("lane lines", img)
 
     rawCapture.truncate(0)  # Release cache
