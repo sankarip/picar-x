@@ -2,10 +2,13 @@ import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
+import warnings
+warnings.simplefilter('ignore', np.RankWarning)
 camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 24
 rawCapture = PiRGBArray(camera, size=camera.resolution)
+
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
@@ -38,7 +41,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                                     np.array([]), minLineLength=8, maxLineGap=4)
     #print(len(line_segments))
     if line_segments is not None:
-        print(len(line_segments))
+        #print(len(line_segments))
         for line in line_segments:
             x1, y1, x2, y2 = line[0]
             cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
