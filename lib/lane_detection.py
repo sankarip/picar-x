@@ -16,7 +16,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #cv2.imshow("video", img)  # OpenCV image show
     #cv2.imshow("mask", mask)  # OpenCV image show
     edges = cv2.Canny(mask, 200, 400)
-    cv2.imshow("edges", edges)
+    #cv2.imshow("edges", edges)
+    height, width = edges.shape
+    mask = np.zeros_like(edges)
+
+    # only focus bottom half of the screen
+    polygon = np.array([[
+        (0, height * 1 / 2),
+        (width, height * 1 / 2),
+        (width, height),
+        (0, height),
+    ]], np.int32)
+
+    cv2.fillPoly(mask, polygon, 255)
+    cropped_edges = cv2.bitwise_and(edges, mask)
+    cv2.imshow("cropped edges", cropped_edges)
     rawCapture.truncate(0)  # Release cache
 
     k = cv2.waitKey(1) & 0xFF
