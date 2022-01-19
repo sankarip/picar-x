@@ -79,11 +79,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
         left_fit_average = np.average(left_fit, axis=0)
         if len(left_fit) > 0:
-            lane_lines.append(make_points(height,width left_fit_average))
+            lane_lines.append(make_points(height,width, left_fit_average))
 
         right_fit_average = np.average(right_fit, axis=0)
         if len(right_fit) > 0:
-            lane_lines.append(make_points(height,width right_fit_average))
+            lane_lines.append(make_points(height,width, right_fit_average))
     print(lane_lines)
     rawCapture.truncate(0)  # Release cache
 
