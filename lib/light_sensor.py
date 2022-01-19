@@ -47,7 +47,7 @@ class light_interpreter(object):
             val3=data_list[2]
             if val1-self.sensitivity>val2:
                 self.turn=1
-            elif val3-self.sensitivitysensitivity>val2:
+            elif val3-self.sensitivity>val2:
                 self.turn=-1
             elif val3-self.sensitivity>val2 and val1-self.sensitivity>val2:
                 print("lines on both sides detected")
@@ -59,7 +59,7 @@ class light_interpreter(object):
 if __name__ == "__main__":
     import time
     print("here")
-    a=light_interpreter(5)
+    a=light_interpreter()
     a.interp()
     time.sleep(.5)
 
