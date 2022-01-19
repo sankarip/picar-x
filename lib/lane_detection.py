@@ -55,7 +55,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         x2 = max(-width, min(2 * width, int((y2 - intercept) / slope)))
         return [[x1, y1, x2, y2]]
 
-    height, width, _ = edges.shape
+    height, width = edges.shape
     left_fit = []
     right_fit = []
     lane_lines = []
