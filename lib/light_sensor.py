@@ -68,16 +68,16 @@ class light_controller(object):
     def light_steer(self):
         if self.control==1:
             px = Picarx()
-            px.set_dir_servo_angle(-20)
+            px.set_dir_servo_angle(-30)
             time.sleep(0.5)
             px.forward(10)
-            time.sleep(.3)
+            time.sleep(.2)
         elif self.control==-1:
             px = Picarx()
-            px.set_dir_servo_angle(20)
+            px.set_dir_servo_angle(30)
             time.sleep(0.5)
             px.forward(10)
-            time.sleep(.3)
+            time.sleep(.2)
         elif self.control==2:
             px = Picarx()
             px.forward(0)
