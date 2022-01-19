@@ -40,11 +40,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
                                     np.array([]), minLineLength=8, maxLineGap=4)
     #print(len(line_segments))
-    if line_segments is not None:
+    #if line_segments is not None:
         #print(len(line_segments))
-        for line in line_segments:
-            x1, y1, x2, y2 = line[0]
-            cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+     #   for line in line_segments:
+      #      x1, y1, x2, y2 = line[0]
+       #     cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
     #cv2.imshow("lane lines", img)
 
     def make_points(h,w, line):
@@ -87,9 +87,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         right_fit_average = np.average(right_fit, axis=0)
         if len(right_fit) > 0:
             lane_lines.append(make_points(height,width, right_fit_average))
-    print(lane_lines)
+    #print(lane_lines)
+    if lane_lines is not None:
+        #print(len(line_segments))
+        for line in lane_lines:
+            x1, y1, x2, y2 = line[0]
+            cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+    cv2.imshow("lane lines", img)
     rawCapture.truncate(0)  # Release cache
-
 
     k = cv2.waitKey(1) & 0xFF
     # 27 is the ESC key, which means that if you press the ESC key to exit
