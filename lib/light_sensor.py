@@ -1,3 +1,17 @@
+import time
+#try:
+ #   from servo import Servo
+  #  from pwm import PWM
+   # from pin import Pin
+   # from adc import ADC
+    #from filedb import fileDB
+    #from ezblock import *
+    #from ezblock import __reset_mcu__
+    #__reset_mcu__()
+    #time.sleep(0.01)
+#except ImportError:
+ #   print("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions")
+  #  from sim_ezblock import *
 from adc import ADC
 import sys
 sys.path.append(r'/home/pi/picar-x/lib')
@@ -42,7 +56,9 @@ class light_interpreter(object):
 
 if __name__ == "__main__":
     import time
-    light_interpreter(5)
+    print("here")
+    a=light_interpreter(5)
+    a.interp()
     time.sleep(.5)
 
 
