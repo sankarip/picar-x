@@ -70,26 +70,29 @@ class light_controller(object):
             px = Picarx()
             px.set_dir_servo_angle(20)
             time.sleep(0.5)
-            px.forward(30)
-            time.sleep(1)
+            px.forward(10)
+            time.sleep(.5)
         elif self.control==-1:
             px = Picarx()
             px.set_dir_servo_angle(-20)
             time.sleep(0.5)
-            px.forward(30)
-            time.sleep(1)
+            px.forward(10)
+            time.sleep(.5)
         elif self.control==2:
             px = Picarx()
             px.forward(0)
+            time.sleep(1)
         else:
             px = Picarx()
-            px.forward(30)
+            px.forward(10)
             time.sleep(.5)
 
 
 if __name__ == "__main__":
     import time
-    while True:
+    #run for 20 seconds
+    t_end = time.time() +20
+    while time.time() < t_end:
         a=light_controller()
         a.light_steer()
 
