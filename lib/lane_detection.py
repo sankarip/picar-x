@@ -36,7 +36,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     min_threshold = 100  # minimal of votes
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
                                     np.array([]), minLineLength=50, maxLineGap=3)
-    print(len(line_segments))
+    #print(len(line_segments))
     if line_segments is not None:
         print(len(line_segments))
         for line in line_segments:
