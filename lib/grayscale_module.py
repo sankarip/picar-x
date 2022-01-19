@@ -1,4 +1,10 @@
 from adc import ADC
+#new lines
+import sys
+sys.path.append(r'/home/pi/picar-x/lib')
+from utils import reset_mcu
+reset_mcu()
+#new lines
 
 class Grayscale_Module(object):
     def __init__(self,ref = 1000):
