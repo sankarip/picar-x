@@ -51,12 +51,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         height=h
         width=w
         slope, intercept = line
-        y1 = height  # bottom of the frame
-        y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
+        if slope !=0:
+            y1 = height  # bottom of the frame
+            y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
 
-        # bound the coordinates within the frame
-        x1 = max(-width, min(2 * width, int((y1 - intercept) / slope)))
-        x2 = max(-width, min(2 * width, int((y2 - intercept) / slope)))
+            # bound the coordinates within the frame
+            x1 = max(-width, min(2 * width, int((y1 - intercept) / slope)))
+            x2 = max(-width, min(2 * width, int((y2 - intercept) / slope)))
+        else:
+            y1 = height  # bottom of the frame
+            y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
+
+            # bound the coordinates within the frame
+            x1 = max(-width, min(2 * width, int((y1 - intercept) / .5)))
+            x2 = max(-width, min(2 * width, int((y2 - intercept) / .5)))
+
         return [[x1, y1, x2, y2]]
 
     height, width = edges.shape
