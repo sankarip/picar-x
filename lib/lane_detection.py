@@ -20,13 +20,7 @@ steering_angles=[]
 #look down
 px = Picarx()
 px.set_camera_servo2_angle(-25)
-time.sleep(1)
-px.set_camera_servo1_angle(30)
-time.sleep(1)
-px.forward(10)
-time.sleep(1)
-px.forward(0)
-time.sleep(3)
+time.sleep(.2)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -163,7 +157,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         # convert to heading for car
         steering_angle = steering_angle - 90
         # drive a little bit
-
         px.set_dir_servo_angle(steering_angle)
         time.sleep(0.5)
         px.forward(10)
