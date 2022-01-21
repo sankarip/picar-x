@@ -8,8 +8,8 @@ camera = PiCamera()
 camera.resolution = (640,480)
 camera.framerate = 24
 rawCapture = PiRGBArray(camera, size=camera.resolution)
-
-
+#start a list for steering angles
+steering_angles=[]
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -122,13 +122,27 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         angle_to_mid_radian = np.arctan(x_offset / y_offset)  # angle (in radian) to center vertical line
         angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / np.pi)  # angle (in degrees) to center vertical line
         steering_angle = angle_to_mid_deg + 90 # this is the steering angle needed by picar front wheel
+        #print(steering_angle)
+        steering_angles.append(steering_angle)
+        if len(steering_angles)==2:
+            ang1=steering_angles[0]
+            ang2=steering_angles[1]
+            #if its within 5 degrees
+            if ang1-5<ang2<ang1+5:
+                steering_angle=steering_angle
+            elif ang1-5>ang2:
+                #only move by 5
+                steering_angle=ang1-5
+            elif ang1+5<ang2:
+                steering_angle=ang1+5
         steering_angle_radian = steering_angle / 180.0 * np.pi
         x1 = int(width / 2)
         y1 = height
         x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
         y2 = int(height / 2)
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
-        #print(steering_angle)
+        #get rid of the old entry
+        steering_angles.pop(0)
     elif len(lane_lines) ==1:
         x1, _, x2, _ = lane_lines[0][0]
         x_offset = x2 - x1
@@ -143,6 +157,26 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         y2 = int(height / 2)
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #print(steering_angle)
+        steering_angles.append(steering_angle)
+        if len(steering_angles)==2:
+            ang1=steering_angles[0]
+            ang2=steering_angles[1]
+            #if its within 5 degrees
+            if ang1-5<ang2<ang1+5:
+                steering_angle=steering_angle
+            elif ang1-5>ang2:
+                #only move by 5
+                steering_angle=ang1-5
+            elif ang1+5<ang2:
+                steering_angle=ang1+5
+        steering_angle_radian = steering_angle / 180.0 * np.pi
+        x1 = int(width / 2)
+        y1 = height
+        x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
+        y2 = int(height / 2)
+        cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
+        #get rid of the old entry
+        steering_angles.pop(0)
     else:
         print("no steering lines found")
     cv2.imshow("steering", img)
