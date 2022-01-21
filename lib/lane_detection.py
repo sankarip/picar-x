@@ -120,7 +120,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         x_offset = (left_x2 + right_x2) / 2 - mid
         y_offset = int(height / 2)
         angle_to_mid_radian = np.arctan(x_offset / y_offset)  # angle (in radian) to center vertical line
-        angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
+        angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / np.pi)  # angle (in degrees) to center vertical line
         steering_angle = angle_to_mid_deg + 90 # this is the steering angle needed by picar front wheel
         print(steering_angle)
     rawCapture.truncate(0)  # Release cache
