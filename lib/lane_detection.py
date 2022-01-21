@@ -19,7 +19,7 @@ rawCapture = PiRGBArray(camera, size=camera.resolution)
 steering_angles=[]
 #look down
 px = Picarx()
-px.set_camera_servo2_angle(-20)
+px.set_camera_servo2_angle(-10)
 time.sleep(.2)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
@@ -160,7 +160,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.set_dir_servo_angle(steering_angle)
         time.sleep(0.5)
         px.forward(10)
-        time.sleep(.1)
+        time.sleep(.2)
         px.forward(0)
         time.sleep(.5)
 
@@ -206,7 +206,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.set_dir_servo_angle(steering_angle)
         time.sleep(0.5)
         px.forward(10)
-        time.sleep(.1)
+        time.sleep(.2)
         px.forward(0)
         time.sleep(.5)
     else:
