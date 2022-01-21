@@ -150,7 +150,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #get rid of the old entry
         steering_angles.pop(0)
-        print(steering_angle)
+
     elif len(lane_lines) ==1:
         x1, _, x2, _ = lane_lines[0][0]
         x_offset = x2 - x1
@@ -166,6 +166,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #print(steering_angle)
         steering_angles.append(steering_angle)
+        # convert to heading for car
+        steering_angle = steering_angle - 90
+        # drive a little bit
+        px = Picarx()
+        px.set_dir_servo_angle(steering_angle)
+        time.sleep(0.5)
+        px.forward(10)
+        time.sleep(.05)
         if len(steering_angles)==2:
             ang1=steering_angles[0]
             ang2=steering_angles[1]
@@ -185,7 +193,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #get rid of the old entry
         steering_angles.pop(0)
-        print(steering_angle)
+        #convert to heading for car
+        steering_angle=steering_angle-90
+        #drive a little bit
+        px = Picarx()
+        px.set_dir_servo_angle(steering_angle)
+        time.sleep(0.5)
+        px.forward(10)
+        time.sleep(.05)
     else:
         print("no steering lines found")
         #don't move
