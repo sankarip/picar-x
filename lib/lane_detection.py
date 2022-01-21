@@ -3,6 +3,13 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
 import warnings
+import time
+import sys
+sys.path.append(r'/home/pi/picar-x/lib')
+from utils import reset_mcu
+reset_mcu()
+from picarx_improved import Picarx
+
 warnings.simplefilter('ignore', np.RankWarning)
 camera = PiCamera()
 camera.resolution = (640,480)
@@ -143,6 +150,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #get rid of the old entry
         steering_angles.pop(0)
+        print(steering_angle)
     elif len(lane_lines) ==1:
         x1, _, x2, _ = lane_lines[0][0]
         x_offset = x2 - x1
@@ -177,8 +185,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
         #get rid of the old entry
         steering_angles.pop(0)
+        print(steering_angle)
     else:
         print("no steering lines found")
+        #don't move
+        px = Picarx()
+        px.forward(0)
+        time.sleep(1)
     cv2.imshow("steering", img)
     rawCapture.truncate(0)  # Release cache
 
