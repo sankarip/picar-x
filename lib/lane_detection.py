@@ -79,9 +79,18 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         for line_segment in line_segments:
             for x1, y1, x2, y2 in line_segment:
 
-                fit = np.polyfit((x1, x2), (y1, y2), 1)
-                slope = fit[0]
-                intercept = fit[1]
+                #fit = np.polyfit((x1, x2), (y1, y2), 1)
+                #slope = fit[0]
+                #intercept = fit[1]
+                #manually doing slope because polyfit breaks
+                if x1 != x2:
+                    #y=mx+b
+                    slope=(y2-y1)/(x2-x1)
+                    intercept=y2-slope*x2
+                else:
+                    #pretend vertical lines are very steep
+                    slope=10000
+                    intercept = y2 - slope * x2
                 if slope < 0:
                     if x1 < left_region_boundary and x2 < left_region_boundary:
                         left_fit.append((slope, intercept))
