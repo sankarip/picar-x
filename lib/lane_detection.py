@@ -111,7 +111,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         for line in lane_lines:
             x1, y1, x2, y2 = line[0]
             cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
-    cv2.imshow("lane lines", img)
+    #cv2.imshow("lane lines", img)
     if len(lane_lines) ==2:
         #print(lane_lines)
         _, _, left_x2, _ = lane_lines[0][0]
@@ -122,15 +122,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         angle_to_mid_radian = np.arctan(x_offset / y_offset)  # angle (in radian) to center vertical line
         angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / np.pi)  # angle (in degrees) to center vertical line
         steering_angle = angle_to_mid_deg + 90 # this is the steering angle needed by picar front wheel
-        print(steering_angle)
+        #print(steering_angle)
     elif len(lane_lines) ==1:
         x1, _, x2, _ = lane_lines[0][0]
         x_offset = x2 - x1
         y_offset = int(height / 2)
-        print(steering_angle)
+        #print(steering_angle)
     else:
         print("no steering lines found")
-
+    steering_angle_radian = steering_angle / 180.0 * np.pi
+    x1 = int(width / 2)
+    y1 = height
+    x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
+    y2 = int(height / 2)
+    cv2.line(img, (x1, y1), (x2, y2), (255,0,0), 5)
+    cv2.imshow("steering", img)
     rawCapture.truncate(0)  # Release cache
 
     k = cv2.waitKey(1) & 0xFF
