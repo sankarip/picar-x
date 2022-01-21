@@ -154,7 +154,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         steering_angle = steering_angle - 90
         # drive a little bit
         px = Picarx()
-        px.set_dir_servo_angle(steering_angle)
+        px.set_dir_servo_angle(steering_angle*-1)
         time.sleep(0.5)
         px.forward(10)
         time.sleep(.01)
@@ -198,7 +198,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         steering_angle=steering_angle-90
         #drive a little bit
         px = Picarx()
-        px.set_dir_servo_angle(steering_angle)
+        px.set_dir_servo_angle(steering_angle*-1)
         time.sleep(0.5)
         px.forward(10)
         time.sleep(.01)
