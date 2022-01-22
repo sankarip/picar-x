@@ -162,7 +162,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.forward(5)
         time.sleep(.1)
         px.forward(0)
-        time.sleep(.2)
+        time.sleep(.4)
 
 
     elif len(lane_lines) ==1:
@@ -209,7 +209,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         time.sleep(.1)
         #stop moving so that the camera can catch up
         px.forward(0)
-        time.sleep(.2)
+        time.sleep(.4)
     else:
         print("no steering lines found")
         #don't move
