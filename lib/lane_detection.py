@@ -47,9 +47,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #cv2.imshow("cropped edges", cropped_edges)
     rho = 2  # distance precision in pixel, i.e. 1 pixel
     angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
-    min_threshold = 30  # minimal of votes
+    min_threshold = 20  # minimal of votes
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
-                                    np.array([]), minLineLength=10, maxLineGap=4)
+                                    np.array([]), minLineLength=5, maxLineGap=4)
     #print(len(line_segments))
     #if line_segments is not None:
         #print(len(line_segments))
