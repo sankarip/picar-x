@@ -9,7 +9,7 @@ sys.path.append(r'/home/pi/picar-x/lib')
 from utils import reset_mcu
 reset_mcu()
 from picarx_improved import Picarx
-
+#ignore warnings from polyfit
 warnings.simplefilter('ignore', np.RankWarning)
 camera = PiCamera()
 camera.resolution = (640,480)
@@ -19,7 +19,7 @@ rawCapture = PiRGBArray(camera, size=camera.resolution)
 steering_angles=[]
 #look down
 px = Picarx()
-px.set_camera_servo2_angle(20)
+px.set_camera_servo2_angle(25)
 time.sleep(.2)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
@@ -160,9 +160,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.set_dir_servo_angle(steering_angle)
         time.sleep(0.5)
         px.forward(5)
-        time.sleep(.2)
+        time.sleep(.1)
         px.forward(0)
-        time.sleep(.2)
+        time.sleep(.1)
 
 
     elif len(lane_lines) ==1:
@@ -206,9 +206,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.set_dir_servo_angle(steering_angle)
         time.sleep(0.5)
         px.forward(5)
-        time.sleep(.2)
+        time.sleep(.1)
+        #stop moving so that the camera can catch up
         px.forward(0)
-        time.sleep(.2)
+        time.sleep(.1)
     else:
         print("no steering lines found")
         #don't move
