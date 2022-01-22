@@ -139,7 +139,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
             ang1=steering_angles[0]
             ang2=steering_angles[1]
             #if its within 5 degrees
-            print("here")
+            print("ang1: ", ang1)
+            print("ang2: ", ang2)
             if ang1-5<ang2<ang1+5:
                 steering_angle=steering_angle
             elif ang1-5>ang2:
@@ -180,13 +181,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
         y2 = int(height / 2)
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
-        #print(steering_angle)
         steering_angles.append(steering_angle)
-
         if len(steering_angles)==2:
             ang1=steering_angles[0]
             ang2=steering_angles[1]
-            print("here")
+            print("ang1: ", ang1)
+            print("ang2: ", ang2)
             #if its within 5 degrees
             if ang1-5<ang2<ang1+5:
                 steering_angle=steering_angle
