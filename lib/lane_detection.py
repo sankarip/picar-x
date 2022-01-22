@@ -19,7 +19,7 @@ rawCapture = PiRGBArray(camera, size=camera.resolution)
 steering_angles=[]
 #look down
 px = Picarx()
-px.set_camera_servo2_angle(-2)
+px.set_camera_servo2_angle(10)
 time.sleep(.2)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
     img = frame.array
@@ -49,7 +49,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     angle = np.pi / 180  # angular precision in radian, i.e. 1 degree
     min_threshold = 30  # minimal of votes
     line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold,
-                                    np.array([]), minLineLength=8, maxLineGap=4)
+                                    np.array([]), minLineLength=10, maxLineGap=4)
     #print(len(line_segments))
     #if line_segments is not None:
         #print(len(line_segments))
