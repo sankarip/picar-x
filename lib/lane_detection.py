@@ -139,6 +139,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
             ang1=steering_angles[0]
             ang2=steering_angles[1]
             #if its within 5 degrees
+            print("here")
             if ang1-5<ang2<ang1+5:
                 steering_angle=steering_angle
             elif ang1-5>ang2:
@@ -146,19 +147,19 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 steering_angle=ang1-5
             elif ang1+5<ang2:
                 steering_angle=ang1+5
+            # get rid of the old entry
+            steering_angles.pop(0)
         steering_angle_radian = steering_angle / 180.0 * np.pi
         x1 = int(width / 2)
         y1 = height
         x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
         y2 = int(height / 2)
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
-        #get rid of the old entry
-        steering_angles.pop(0)
+
         # convert to heading for car
         steering_angle = steering_angle - 90
         # drive a little bit
         px.set_dir_servo_angle(steering_angle)
-        print(steering_angle)
         time.sleep(0.5)
         px.forward(5)
         time.sleep(.1)
@@ -185,6 +186,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         if len(steering_angles)==2:
             ang1=steering_angles[0]
             ang2=steering_angles[1]
+            print("here")
             #if its within 5 degrees
             if ang1-5<ang2<ang1+5:
                 steering_angle=steering_angle
@@ -193,14 +195,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 steering_angle=ang1-5
             elif ang1+5<ang2:
                 steering_angle=ang1+5
+            # get rid of the old entry
+            steering_angles.pop(0)
         steering_angle_radian = steering_angle / 180.0 * np.pi
         x1 = int(width / 2)
         y1 = height
         x2 = int(x1 - height / 2 / np.tan(steering_angle_radian))
         y2 = int(height / 2)
         cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 5)
-        #get rid of the old entry
-        steering_angles.pop(0)
         #convert to heading for car
         steering_angle=steering_angle-90
         #drive a little bit
