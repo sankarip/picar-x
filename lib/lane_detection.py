@@ -217,6 +217,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         px.forward(0)
         time.sleep(1)
     cv2.imshow("steering", img)
+    print(steering_angle)
     rawCapture.truncate(0)  # Release cache
 
     k = cv2.waitKey(1) & 0xFF
