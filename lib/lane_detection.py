@@ -148,6 +148,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 steering_angle=ang1-5
             elif ang1+5<ang2:
                 steering_angle=ang1+5
+            #replace the latest entry with the new angle
+            steering_angles.pop(1)
+            steering_angles.append(steering_angle)
             # get rid of the old entry
             steering_angles.pop(0)
         steering_angle_radian = steering_angle / 180.0 * np.pi
@@ -195,6 +198,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 steering_angle=ang1-5
             elif ang1+5<ang2:
                 steering_angle=ang1+5
+            # replace the latest entry with the new angle
+            steering_angles.pop(1)
+            steering_angles.append(steering_angle)
             # get rid of the old entry
             steering_angles.pop(0)
         steering_angle_radian = steering_angle / 180.0 * np.pi
