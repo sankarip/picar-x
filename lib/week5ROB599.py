@@ -131,8 +131,8 @@ class ultrasonicSensor():
         return -1
 
 class ultrasonicInterp():
-    def __init__(self):
-        self.scale=10
+    def __init__(self,scale):
+        self.scale=scale
     def ultrainterp(self, distance):
         if distance>1:
             speed=distance/self.scale
@@ -160,9 +160,9 @@ datainterp=rossros.ConsumerProducer(interp_con_prod,databus,interpbus,0.1,termbu
 control=rossros.Consumer(consumer_controller,interpbus,0.1,termbus, "consumer")
 ultdatabus=rossros.Bus(0,"ult data bus")
 ultinterpbus=rossros.Bus(0,"ult interp bus")
-ultdataprod=rossros.Producer(ultrasonicSensor.read,ultdatabus,0.1,termbus,"ult producer")
-ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp.ultrainterp,ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
-ultcontrol=rossros.Consumer(ultcont.controlUlt,ultinterpbus,0.1,termbus, "ult consumer")
+ultdataprod=rossros.Producer(ultrasonicSensor().read,ultdatabus,0.1,termbus,"ult producer")
+ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp(10).ultrainterp,ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
+ultcontrol=rossros.Consumer(ultcont().controlUlt,ultinterpbus,0.1,termbus, "ult consumer")
 with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
     #eSensor = executor.submit(dataprod)
     #eInterpreter = executor.submit(datainterp)
