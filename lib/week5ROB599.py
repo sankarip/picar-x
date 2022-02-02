@@ -172,9 +172,9 @@ with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
     eUltcons= executor.submit(ultcontrol)
     eTimer=executor.submit(timer)
 
-eSensor.result()
-eInterpreter.result()
-eController.result()
+#eSensor.result()
+#eInterpreter.result()
+#eController.result()
 eUltprod.result()
 eUltint.result()
 eUltcons.result()
