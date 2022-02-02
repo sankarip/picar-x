@@ -169,7 +169,7 @@ ultcontrol=rossros.Consumer(ultcont.controlUlt,ultinterpbus,0.1,termbus, "ult co
 #eSensor.result()
 #eInterpreter.result()
 #eController.result()
-a=ultrasonicSensor
+a=ultrasonicSensor()
 a.read()
 
 
