@@ -94,7 +94,7 @@ def consumer_controller(turnval):
     logging.debug("consumed")
 
 class ultrasonicSensor():
-    def __init__(self, trig, echo, timeout=0.02):
+    def __init__(self, timeout=0.02):
         self.trig = Pin('D2')
         self.echo = Pin('D3')
         self.timeout = timeout
