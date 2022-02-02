@@ -74,15 +74,11 @@ def consumer_controller(turnval):
         px = Picarx()
         px.set_dir_servo_angle(-15)
         time.sleep(0.5)
-        px.forward(5)
-        time.sleep(.05)
     #turn right
     elif turnval==-1:
         px = Picarx()
         px.set_dir_servo_angle(15)
         time.sleep(0.5)
-        px.forward(5)
-        time.sleep(.05)
     #dont move
     elif turnval==2:
         px = Picarx()
@@ -91,7 +87,7 @@ def consumer_controller(turnval):
     #go straight
     else:
         px = Picarx()
-        px.forward(5)
+        px.forward(3)
         time.sleep(.05)
     logging.debug("consumed")
 
@@ -144,7 +140,7 @@ class ultcont():
     def __init__(self):
         self.px=Picarx()
     def controlUlt(self,speed):
-        if speed>5:
+        if speed>3:
             speed=5
         self.px.forward(speed)
 
@@ -160,7 +156,7 @@ control=rossros.Consumer(consumer_controller,interpbus,0.1,termbus, "consumer")
 ultdatabus=rossros.Bus(0,"ult data bus")
 ultinterpbus=rossros.Bus(0,"ult interp bus")
 ultdataprod=rossros.Producer(ultrasonicSensor().read,ultdatabus,0.1,termbus,"ult producer")
-ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp(30).ultrainterp,ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
+ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp(50).ultrainterp,ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
 ultcontrol=rossros.Consumer(ultcont().controlUlt,ultinterpbus,0.1,termbus, "ult consumer")
 with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
     eSensor = executor.submit(dataprod)
