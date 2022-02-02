@@ -72,12 +72,12 @@ def interp_con_prod(sensordata):
 def consumer_controller(turnval):
     if turnval==1:
         px = Picarx()
-        px.set_dir_servo_angle(-17)
+        px.set_dir_servo_angle(-25)
         time.sleep(1)
     #turn right
     elif turnval==-1:
         px = Picarx()
-        px.set_dir_servo_angle(17)
+        px.set_dir_servo_angle(25)
         time.sleep(1)
     #dont move
     elif turnval==2:
