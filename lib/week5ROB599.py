@@ -72,14 +72,14 @@ def interp_con_prod(sensordata):
 def consumer_controller(turnval):
     if turnval==1:
         px = Picarx()
-        px.set_dir_servo_angle(-30)
+        px.set_dir_servo_angle(-15)
         time.sleep(0.5)
         px.forward(5)
         time.sleep(.05)
     #turn right
     elif turnval==-1:
         px = Picarx()
-        px.set_dir_servo_angle(30)
+        px.set_dir_servo_angle(15)
         time.sleep(0.5)
         px.forward(5)
         time.sleep(.05)
@@ -144,6 +144,8 @@ class ultcont():
     def __init__(self):
         self.px=Picarx()
     def controlUlt(self,speed):
+        if speed>5:
+            speed=5
         self.px.forward(speed)
 
 
