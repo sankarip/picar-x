@@ -132,7 +132,7 @@ class ultrasonicInterp():
     def __init__(self):
         self.scale=10
     def ultrainterp(self, distance):
-        if distance>10:
+        if distance>1:
             speed=distance/self.scale
         else:
             speed=0
@@ -144,6 +144,10 @@ class ultcont():
     def controlUlt(self,speed):
         self.px.forward(speed)
 
+#create instances of functions
+a=ultrasonicSensor()
+b=ultrasonicInterp()
+c=ultcont()
 #start a bus
 databus=rossros.Bus(0,"data bus")
 termbus=rossros.Bus(0,"term bus")
@@ -154,22 +158,25 @@ datainterp=rossros.ConsumerProducer(interp_con_prod,databus,interpbus,0.1,termbu
 control=rossros.Consumer(consumer_controller,interpbus,0.1,termbus, "consumer")
 ultdatabus=rossros.Bus(0,"ult data bus")
 ultinterpbus=rossros.Bus(0,"ult interp bus")
-ultdataprod=rossros.Producer(ultrasonicSensor.read,ultdatabus,0.1,termbus,"ult producer")
-ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp.ultrainterp,ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
-ultcontrol=rossros.Consumer(ultcont.controlUlt,ultinterpbus,0.1,termbus, "ult consumer")
-#with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
- #   eSensor = executor.submit(dataprod)
-  #  eInterpreter = executor.submit(datainterp)
-   # eController = executor.submit(control)
-    #eUltprod= executor.submit(ultdataprod)
-    #eUltint= executor.submit(ultdatainterp)
-    #eUltcons= executor.submit(ultcontrol)
-    #eTimer=executor.submit(timer)
+ultdataprod=rossros.Producer(ultrasonicSensor.read(a),ultdatabus,0.1,termbus,"ult producer")
+ultdatainterp=rossros.ConsumerProducer(ultrasonicInterp.ultrainterp(b),ultdatabus,ultinterpbus,0.1,termbus, "ult consumer producer")
+ultcontrol=rossros.Consumer(ultcont.controlUlt(c),ultinterpbus,0.1,termbus, "ult consumer")
+with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
+    eSensor = executor.submit(dataprod)
+    eInterpreter = executor.submit(datainterp)
+    eController = executor.submit(control)
+    eUltprod= executor.submit(ultdataprod)
+    eUltint= executor.submit(ultdatainterp)
+    eUltcons= executor.submit(ultcontrol)
+    eTimer=executor.submit(timer)
 
-#eSensor.result()
-#eInterpreter.result()
-#eController.result()
-a=ultrasonicSensor()
-a.read()
+eSensor.result()
+eInterpreter.result()
+eController.result()
+eUltprod.result()
+eUltint.result()
+eUltcons.result()
+#a=ultrasonicSensor()
+#a.read()
 
 
