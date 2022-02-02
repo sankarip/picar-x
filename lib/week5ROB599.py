@@ -146,10 +146,7 @@ class ultcont():
     def controlUlt(self,speed):
         self.px.forward(speed)
 
-#create instances of functions
-a=ultrasonicSensor()
-b=ultrasonicInterp()
-c=ultcont()
+
 #start a bus
 databus=rossros.Bus(0,"data bus")
 termbus=rossros.Bus(0,"term bus")
