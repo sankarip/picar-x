@@ -141,8 +141,9 @@ class ultcont():
         self.px=Picarx()
     def controlUlt(self,speed):
         if speed>3:
-            speed=5
+            speed=3
         self.px.forward(speed)
+        time.sleep(.1)
 
 
 #start a bus
