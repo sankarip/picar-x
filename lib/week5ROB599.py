@@ -130,7 +130,7 @@ class ultrasonicInterp():
     def __init__(self,scale):
         self.scale=scale
     def ultrainterp(self, distance):
-        if distance>10:
+        if distance>25:
             speed=distance/self.scale
         else:
             speed=0
@@ -167,13 +167,11 @@ with concurrent.futures.ThreadPoolExecutor(max_workers =7) as executor:
     eUltcons= executor.submit(ultcontrol)
     eTimer=executor.submit(timer)
 
-#eSensor.result()
-#eInterpreter.result()
-#eController.result()
+eSensor.result()
+eInterpreter.result()
+eController.result()
 eUltprod.result()
 eUltint.result()
 eUltcons.result()
-#a=ultrasonicSensor()
-#a.read()
 
 
