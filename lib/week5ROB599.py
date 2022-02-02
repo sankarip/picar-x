@@ -134,7 +134,7 @@ class ultrasonicInterp():
     def __init__(self,scale):
         self.scale=scale
     def ultrainterp(self, distance):
-        if distance>1:
+        if distance>4:
             speed=distance/self.scale
         else:
             speed=0
