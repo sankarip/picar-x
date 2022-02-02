@@ -18,6 +18,8 @@ import sys
 sys.path.append(r'/home/pi/picar-x/lib')
 from picarx_improved import Picarx
 import logging
+from utils import reset_mcu
+reset_mcu()
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
 logging.getLogger().setLevel(logging.WARNING)
